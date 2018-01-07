@@ -440,7 +440,7 @@ train_array, test_array = split_dataset(train_split,label_onehot,
 train_list = train_loop(epochs, train_array,test_array, batchsize_train, 
                         image_data, label_onehot,unit_test)
 # start testing
-test_list = test_loop(100, test_array, batchsize_test,image_data, 
+test_list = test_loop(1, test_array, batchsize_test,image_data, 
                       label_onehot, unit_test)
 
 ########################################################################
@@ -582,9 +582,9 @@ model["label_dict"] = label_dict
 
 # export to .csv file
 model_csv = [timemarker,train_list[4],test_list[1],
-             modtype,modlayer,'xx', 'xx', 'xx',classes,
+             modtype,modlayer,classes,
              classifier,epochs,acttype,learnrate,optimizing,
-             norm,'xx',batchsize_train,batchsize_test, 'No']
+             norm,batchsize_train,batchsize_test]
 df = pd.DataFrame(columns=model_csv)
 # save only good models
 if train_list[4] > save_thres:
