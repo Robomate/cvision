@@ -32,7 +32,7 @@ date = timestamp[0:-16]
 timemarker = date+"_" + daytime
 
 # init paths:
-#path = "/home/root_alien/Desktop/AML_Lab/" #on @alien2
+#path = "/home/root_alien/Desktop/AML_Lab/" #on alien2
 path = "/home/roboball/Desktop/AML_Lab/" #on laptop
 filepath = path + '04_nn_training/data/' #on laptop
 
@@ -49,7 +49,7 @@ modlayer = 4
 train_split = 0.9 # train/test split ratio
 randomint = 1 # fix initial randomness:
 norm = 'no_norm'
-optimizing = 'adam' korf
+optimizing = 'adam'
 classifier = 'softmax'
 save_thres = 0.9 # save only good models	
 
@@ -100,7 +100,7 @@ def load_mat_data(files):
 		mat = scipy.io.loadmat('data/' + files[pos])
 		# load images
 		images = np.array(mat['image_tensor'])
-		num_im = image_data.shape[2] korf
+		num_im = image_data.shape[2]
 		num_im_list.append(num_im)
 		#print(images.shape)
 		image_data = np.append(image_data, images, axis=2)
@@ -117,7 +117,7 @@ def load_mat_data(files):
 	for pos in range(len(num_im_list)):
 		lab_array = np.ones(num_im_list[pos]) * label_data[pos]
 		label_data_extend = np.append(label_data_extend, lab_array)
-	# images: swap axis, convert to 4D tensor korf
+	# images: swap axis, convert to 4D tensor
 	image_data = np.swapaxes(image_data,0,2)
 	image_data = image_data[:,:,:,np.newaxis]
 	#number of classes
@@ -136,7 +136,7 @@ def one_hot_encoding(label_data,label_dict):
 	return lab_one
 
 def create_random_vec(randomint, datalength):
-	'''create random vector''' korf
+	'''create random vector'''
 	np.random.seed(randomint)
 	randomvec = np.arange(datalength)
 	np.random.shuffle(randomvec)
@@ -173,7 +173,7 @@ def batch_generator(batchsize, rand_mb, image_data, label_onehot):
 	image_mb = image_mbx[np.newaxis,:,:,:]
 	lab_mbx = label_onehot[rand_mb[0]]
 	lab_mb = lab_mbx[np.newaxis,:]
-	#print(image_mb.shape) korf
+	#print(image_mb.shape)
 	for pos2 in range(1,len(rand_mb)):
 		# images
 		image = image_data[rand_mb[pos2],:,:,:]
@@ -230,7 +230,7 @@ def train_loop(epochs, train_list,test_list, batchsize,
 			train_acc_history = np.append(train_acc_history,train_acc)	
 			#check progress: training accuracy
 			if  pos%4 == 0:
-				# start feeding data into the model: korf
+				# start feeding data into the model:
 				feedval = {x_input: train_im_mb, y_target: train_lab_mb}
 				train_accuracy = accuracy.eval(feed_dict=feedval)
 				crossvalidationloss = sess.run(cross_entropy,feed_dict=feedval)
@@ -296,7 +296,7 @@ def test_loop(epochs, test_list, batchsize,image_data,
 				print('test utterance: '+ str(pos*batchsize)+'/'+str(num_samples))
 				print('test accuracy: %.2f'% test_accuracy + 
 				" -- test time: " + str(t2_2-t2_1)[0:-7])
-	print('=============================================') korf
+	print('=============================================')
 	# total test stats:
 	print('test utterance: '+ str(num_samples)+'/'+str(num_samples))
 	total_testacc = np.mean(test_acc_history, axis=0)
@@ -340,7 +340,7 @@ def matmul(x, W, b, name="fc"):
 	  return tf.add(tf.matmul(x, W), b)
 		
 def dense(x, W, b, name="dense"):
-	'''matrix vector multiplication''' korf
+	'''matrix vector multiplication'''
 	with tf.name_scope(name):
 		return tf.add(tf.matmul(x, W), b)
 
@@ -412,7 +412,7 @@ softmax = tf.nn.softmax(h_out)
 cross_entropy = tf.reduce_mean(
 tf.nn.softmax_cross_entropy_with_logits(logits= h_out,labels = y_target))
 optimizer = tf.train.AdamOptimizer(learnrate).minimize(cross_entropy)
-correct_prediction = tf.equal(tf.argmax(h_out,1), tf.argmax(y_target,1)) korf
+correct_prediction = tf.equal(tf.argmax(h_out,1), tf.argmax(y_target,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 # init tf session :
@@ -451,7 +451,7 @@ test_list = test_loop(1, test_array, batchsize_test,image_data,
 plot_model_sum = "model_summary: "+str(modtype)+"_"+str(modlayer)+" hid_layer, "+\
                           ", classes: " +str(classes)+", epochs: "+str(epochs)+"\n"+\
                           norm+ ", "+"training accuracy %.3f"%train_list[4]+\
-                          " , test accuracy %.3f"%test_list[1]+" , "+\ korf
+                          " , test accuracy %.3f"%test_list[1]+" , "+\
                           str(timemarker)
                           
 # define storage path for model:
@@ -481,7 +481,7 @@ plt.subplots_adjust(wspace=0.5,hspace=0.5)
 plt.subplot(211)
 plt.plot(range(len(train_list[1])),train_list[1], color='#1E90FF')
 #plt.plot(np.convolve(train_list[1], np.ones((wintrain,))/wintrain, mode='valid'), color='#97FFFF', alpha=1)
-plt.axis([0,len(train_list[1]),0,int(10)+1]) korf
+plt.axis([0,len(train_list[1]),0,int(10)+1])
 #plt.axis([0,len(cost_history),0,int(np.max(cost_history))+1])
 plt.title('Cross Entropy Training Loss')
 plt.xlabel('number of batches, batch size: '+ str(batchsize_train))
@@ -503,7 +503,7 @@ pltim.imsave("imagetemp/out.png", im1)
 
 #=======================================================================
 #plot testing
-#======================================================================= korf
+#=======================================================================
 
 #plot validation loss function
 plt.figure(2, figsize=(8,8))
