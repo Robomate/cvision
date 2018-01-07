@@ -1,0 +1,10 @@
+,Timestamp,Train_Acc,Test_Acc,Model_Type,HiddenLayer,Classes,Classifiier,Epochs,Actfunc,Learnrate,Optimizer,Norm,Trainbatchsize,Testbatchsize,Test_Acc-Digits
+,2018-01-05_20:45,0.560000002384,0.65000000596,CNN,4,8,softmax,1,relu,0.01,adam,no_norm,5,1,No
+,2018-01-05_20:53,0.871875006706,0.9375,CNN,4,8,softmax,1,relu,0.01,adam,no_norm,5,1,No
+,2018-01-05_20:56,0.812500008382,875,CNN,4,8,softmax,1,relu,0.01,adam,no_norm,5,1,No
+,2018-01-05_21:09,0.979133336196,0.9875,CNN,4,8,softmax,100,relu,0.01,adam,no_norm,50,1,No
+,2018-01-05_21:14,0.991000002537,0.97499999404,CNN,4,8,softmax,200,relu,0.01,adam,no_norm,50,10,No
+,2018-01-07_12:56,0.948142858275,0.899999991059,CNN,4,8,softmax,20,relu,0.01,adam,no_norm,50,10,No
+,2018-01-07_13:00,0.94885714416,0.82499999702,CNN,4,8,softmax,20,relu,0.01,adam,no_norm,50,10,No
+,2018-01-07_13:02,0.951857145131,0.97499999404,CNN,4,8,softmax,20,relu,0.01,adam,no_norm,50,10,No
+,2018-01-07_13:03,0.929571430811,0.924999991506,CNN,4,8,softmax,20,relu,0.01,adam,no_norm,50,10,No
